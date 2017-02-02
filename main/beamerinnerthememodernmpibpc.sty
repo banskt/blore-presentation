@@ -1,0 +1,40 @@
+\mode<presentation>
+
+
+% Title Page
+\defbeamertemplate*{title page}{customized}[1][]
+{
+    \vskip-3.1em%\par
+    \begin{beamercolorbox}[wd=\paperwidth,ht=0.61\paperheight,sep=1.5em,#1]{title}
+      \usebeamerfont{title}\inserttitle\par
+    \end{beamercolorbox}
+    \nointerlineskip
+    \begin{beamercolorbox}[wd=\paperwidth,ht=0.25em,#1]{titleShadow}
+        \mbox{}
+    \end{beamercolorbox}
+    \leavevmode
+    \hbox{%
+      \begin{beamercolorbox}[wd=.55\textwidth, ht=0.35\paperheight, sep=0.05em]{author}
+        {\usebeamercolor[fg]{author name}\usebeamerfont{author}\insertauthor\par}
+        \vspace{0.1cm}
+        {\usebeamerfont{institute}\insertinstitute \par
+         \usebeamerfont{date}\insertdate
+        }
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.45\textwidth, ht=0.35\paperheight, sep=0.05em]{titlegraphic bg}%
+        {\flushright\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+      \end{beamercolorbox}
+    }
+}
+
+\defbeamertemplate*{footnote}{customized}
+{
+  %\parindent 1em\noindent%
+  \noindent
+  \raggedright
+  \hbox to 1.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+  \vspace{0.3em}
+}
+
+
+\mode<all>

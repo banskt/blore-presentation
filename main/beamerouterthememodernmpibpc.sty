@@ -1,0 +1,37 @@
+\mode<presentation>
+
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+\beamer@compresstrue
+
+\defbeamertemplate*{footline}{modernmpibpc theme}
+{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=0.8\paperwidth,ht=2ex,left,dp=1ex]{subsection in head/foot}
+     \hspace{1em} \usebeamerfont{subsection in head/foot}\insertsubsectionhead
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.2\paperwidth,ht=2ex,center,dp=1ex]{pagenumber in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}
+  }
+}
+
+%\setbeamertemplate{frametitle}
+%{
+%    \nointerlineskip
+%    \begin{beamercolorbox}[sep=0.3cm,ht=2.5em,wd=\paperwidth]{frametitle}
+%        \vbox{}\vskip-2ex%
+%        %\strut
+%        \insertframetitle
+%        %\strut
+%        \vskip-0.2ex%
+%    \end{beamercolorbox}
+%    %\nointerlineskip
+%    %\begin{beamercolorbox}[wd=\paperwidth,ht=0.15em]{frametitlehighlight}
+%    %    \mbox{}
+%    %\end{beamercolorbox}
+%}
+
+\mode
+<all>

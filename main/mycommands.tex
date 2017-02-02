@@ -1,0 +1,85 @@
+%%% text usefuls
+\newcommand{\ie}{{\it i.e.\ }}
+\newcommand{\eg}{{\it e.g.\ }}
+\newcommand{\etal}{{\it et al.\ }}
+\newcommand{\ibid}{{\it ibid.\ }}
+\newcommand{\cf}{{\it cf.\ }}
+
+
+\newlength{\mylen}
+\newlength{\mycolsep}
+\setlength{\mycolsep}{1cm}
+\newcommand{\mytwocolumn}[4]{
+   \setlength{\mylen}{\dimexpr#1\textwidth-0.5\mycolsep}
+   %% \vskip -2em
+   \begin{columns}[#2,onlytextwidth]
+   \begin{column}{\mylen}
+   #3
+   \end{column}
+   \begin{column}{\dimexpr\textwidth-\mylen-\mycolsep}
+   #4
+   \end{column}
+   \end{columns}}
+
+\newcommand{\myfulltwocolumn}[4]{
+   \setlength{\mycolsep}{0em}
+   \setlength{\mylen}{\dimexpr#1\textwidth-0.5\mycolsep}
+   %% \vskip -2em
+   \begin{columns}[#2,onlytextwidth]
+   \begin{column}{\mylen}
+   #3
+   \end{column}
+   \begin{column}{\dimexpr\textwidth-\mylen-\mycolsep}
+   #4
+   \end{column}
+   \end{columns}}
+
+\newcommand{\defcolumn}[5]{
+   \setlength{\mycolsep}{0em}
+   \setlength{\mylen}{\dimexpr#2\textwidth-0.5\mycolsep}
+   %% \vskip -2em
+   \begin{columns}[#3,onlytextwidth]
+   \begin{column}{\mylen}
+   {\color{#1} #4}
+   \end{column}
+   {\color{#1} \vrule{}}
+   \begin{column}{\dimexpr\textwidth-\mylen-\mycolsep}
+   #5
+   \end{column}
+   \end{columns}}
+
+
+\usepackage[absolute,overlay]{textpos}
+\newcommand{\references}[1]{%
+  \begin{textblock*}{\textwidth}[0,1](0.9em,0.99\textheight)
+  \raggedright {\usebeamercolor[fg]{references}\fontsize{7}{7}\selectfont{#1} \par}
+  \end{textblock*}
+}
+
+\renewenvironment{equation}{%
+    \begin{equation*}
+}{
+    \nonumber 
+    \end{equation*}
+}
+
+\newcommand\myreference[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\newcommand{\tss}[1]{\ensuremath{^{\text{\kern1pt\scriptsize #1}}}}
+\DeclareMathOperator{\logistic}{lf}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+\newcommand{\vz}{\mathbf{z}}
+\newcommand{\vv}{\mathbf{v}}
+\newcommand{\vX}{\mathbf{X}}
+\newcommand{\vY}{\mathbf{Y}}
+\newcommand{\idop}{\ensuremath{\mathds{I}}}
+\newcommand{\idopn}[1]{\ensuremath{\mathds{I}_{#1}}}
