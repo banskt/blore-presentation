@@ -297,7 +297,7 @@
   \frametitle{Preview of BVSLR}
   \myfulltwocolumn{0.6}{T}
   {
-    \includegraphics[width=1.0\textwidth]{figures/simu_locus_precision_recall.pdf}\\
+    \includegraphics[width=1.0\textwidth]{figures/simu_locus_precision_recall_withld.pdf}\\
   }{
     \begin{align*}
       \text{\scriptsize Precision} & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}} \\
@@ -666,12 +666,13 @@
   \frametitle{Prediction of causal loci}
   \myfulltwocolumn{0.6}{T}
   {
-    \includegraphics[width=1.0\textwidth]{figures/bvslr_locus_prediction_simu.png}\\
+    \includegraphics[width=1.0\textwidth]{figures/simu_locus_scatter_nold.png}\\
   }{
     \scriptsize
     \begin{itemize1}
-      \item 6000 causal loci (120 from each of the 50 simulations)
-      \item 4000 non-causal loci (80 from each of the 50 simulations)
+      \item Shaded region shows improvement with BVSLR
+      \item 5000 causal loci (100 from each of the 50 simulations)
+      \item 5000 non-causal loci (100 from each of the 50 simulations)
     \end{itemize1}
   }
 \end{frame}
@@ -680,12 +681,28 @@
   \frametitle{Prediction of causal loci}
   \myfulltwocolumn{0.6}{T}
   {
-    \includegraphics[width=1.0\textwidth]{figures/simu_locus_precision_recall.pdf}\\
+    \includegraphics[width=1.0\textwidth]{figures/simu_locus_precision_recall_nold.pdf}\\
   }{
     \begin{align*}
       \text{\scriptsize Precision} & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}} \\
       \text{\scriptsize Recall}    & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FN}} \\
     \end{align*}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{If there are non-causal loci in LD with causal regions}
+  \myfulltwocolumn{0.6}{T}
+  {
+    \includegraphics[width=1.0\textwidth]{figures/simu_locus_precision_recall_withld.pdf}\\
+  }{
+    \begin{align*}
+      \text{\scriptsize Precision} & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}} \\
+      \text{\scriptsize Recall}    & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FN}} \\
+    \end{align*}
+    \begin{itemize1}
+      \item 8 loci (out of 200) in LD with each other were introduced in the simulation
+    \end{itemize1}
   }
 \end{frame}
 
@@ -712,15 +729,27 @@
 
 \begin{frame}
   \frametitle{Finemapping causal variants}
+  \myfulltwocolumn{0.6}{T}
+  {
+    \includegraphics[width=1.0\textwidth]{figures/simu_finemap_recall_nold.pdf}\\
+  }{
+    \begin{itemize1}
+      \item Comparable to PAINTOR up to 20\% recall
+    \end{itemize1}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{BVSLR predicts SNPs in strong LD with actual ones}
   \mytwocolumn{0.5}{T}
   {
     \center
     \vskip -2em
-    \includegraphics[width=1.0\textwidth]{figures/simu_recall_full.pdf} \\
+    \includegraphics[width=1.0\textwidth]{figures/simu_finemap_precision_recall01_nold.pdf} \\
   }{
     \center
     \vskip -2em
-    \includegraphics[width=1.0\textwidth]{figures/simu_recall_precisionld_02.pdf}\\
+    \includegraphics[width=1.0\textwidth]{figures/simu_finemap_precision_recall02_nold.pdf}\\
   }
 \end{frame}
 
