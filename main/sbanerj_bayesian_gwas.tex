@@ -221,11 +221,18 @@
     & p\left( y_{n} = 1 | x_{ni}, v_{0}, v_{i} \right)  = \logistic \left( v_{0} + \sum_i v_{i}x_{ni} \right) & \text{\scriptsize Binary phenotype} \\
     }
   \end{align*}
-  \vskip -1em
-  \uncover<5->{
-  \begin{itemize1}
-    \item Multivariate methods perform better than univariate methods
-  \end{itemize1}
+  \vskip -3em
+  \myfulltwocolumn{0.7}{T}
+  {
+    \uncover<5->{
+    \begin{itemize1}
+      \item Multivariate methods perform better than univariate methods
+    \end{itemize1}
+    }
+  }{
+    \uncover<4->{
+      \includegraphics[height=0.13\textheight]{figures/logistic_function_02.pdf}\\
+    }
   }
 \end{frame}
 
@@ -774,7 +781,7 @@
   \uncover<2->
   {\center
    %\vskip -2em
-   \includegraphics[width=1.0\textwidth]{figures/cad_gwas_germifs.png} \\
+   \includegraphics[width=1.0\textwidth]{figures/cad_gwas_germifs_45.png} \\
    GWAS using SNPTEST / META \\
   }
   \vskip 1em
@@ -787,9 +794,15 @@
 
 \begin{frame}
   \frametitle{BVSLR predictions}
-  {\center
+  \only<1-1>
+  {
   \vskip -1em
-   \includegraphics[width=0.9\textwidth]{figures/loci_classification_01.pdf} \\
+   \includegraphics[height=0.7\textheight]{figures/loci_classification_01.pdf} \\
+  }
+  \only<2->
+  {
+  \vskip -1em
+   \includegraphics[height=0.7\textheight]{figures/loci_classification_03.pdf} \\
   }
 \end{frame}
 
@@ -814,6 +827,8 @@
       3q28    & 0.992  & IL1RAP & Involved in risk pathway \\
       \rowcolor{secondary!15}
       6p25    & 0.992  & SERPINB & patented as biomarker for CVD \\
+      \rowcolor{secondary!30}
+      20q13.3 & 0.991  & EDN3    & GWAS hit for BP / CVD \\
       7q11.22 & 0.990  & AUTS2  & -- \\
       \rowcolor{secondary!15}
       12q24   & 0.982  & ZNF664 & GWAS hit for HDL-C, TG \\
@@ -824,10 +839,20 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Literature-based classification}
+  \frametitle{Extension to 200 loci}
+  \only<1-1>
+  {\center
+   %\vskip -2em
+   GWAS using SNPTEST / META \\
+   \includegraphics[width=1.0\textwidth]{figures/cad_gwas_germifs_200.png} \\
+   \begin{itemize1}
+     \item Applied BVSLR on these 200 loci, selecting 400 SNPs at each locus.
+   \end{itemize1}
+  }
+  \only<2->
   {\center
   \vskip -1em
-   \includegraphics[width=0.9\textwidth]{figures/loci_classification_03.pdf} \\
+   \includegraphics[width=0.9\textwidth]{figures/200_loci_classification_01.pdf} \\
   }
 \end{frame}
 
