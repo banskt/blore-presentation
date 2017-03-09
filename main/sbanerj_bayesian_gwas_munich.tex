@@ -71,6 +71,7 @@
 \tikzstyle{decision} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, line width=1pt, text centered, align=flush center, draw=primary, fill=highlight!20]
 \tikzstyle{origin} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, line width=1pt, text centered, align=flush center, draw=subdue]%text=secondary]
 \tikzstyle{highlight} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, line width=1pt, text centered, align=flush center, draw=secondary, fill=important!30]%text=secondary]
+\tikzstyle{textbox} = [rectangle, text centered, align=flush center]
 \tikzstyle{doubt} = [circle, line width=1pt, text centered, align=flush center, draw=secondary, fill=important!20]
 \tikzstyle{arrow} = [thick,->,>=stealth]
 \tikzstyle{line} = [thick, -]
@@ -170,18 +171,29 @@
       %\item SNPs in linkage disequilibrium with the causal $\Rightarrow$ similar significance scores
       \item Linkage disequilibrium
       %\item<3-> Concerted mechanism $\Rightarrow$ Small individual effect sizes
+      \item Correlation vs coupling
       \item Genetic networks
       %\item Marginal effect of individual SNPs $\neq$ Combined effects
       \item Low effect sizes
     \end{itemize2}
     }
+    \uncover<2->{
+      \center
+      \includegraphics[width=0.6\textwidth]{figures/ld_effect.png}\\
+    }
   }
-  \uncover<3->
+\end{frame}
+
+\begin{frame}
+  \frametitle{How GWAS have improved?}
+  %\uncover<3->
   {\center
   \begin{tikzpicture}[node distance=2cm]
-    \node (improve) at ( 0,  0) [origin] {Improvements};
+    \node (improve) at ( 0,  0) [textbox] {Combine information / evidence};
     \node (multi)   at (-3, -2) [decision] {Multivariate analysis};
     \node (meta)    at ( 3, -2) [decision] {Meta-analysis};
+    \node (text1)   at (-3, -3.2) [textbox] {over many \textbf{SNPs}};
+    \node (text2)   at ( 3, -3.2) [textbox] {over many \textbf{studies}};
     \coordinate (z) at ( 0, -1);
     \draw [line] (improve) -- (z);
     \draw [arrow] (z) -| (meta);
@@ -213,11 +225,11 @@
   \vskip -3em
   \myfulltwocolumn{0.7}{T}
   {
-    \uncover<5->{
-    \begin{itemize1}
-      \item Multivariate methods perform better than univariate methods
-    \end{itemize1}
-    }
+    %\uncover<5->{
+    %\begin{itemize1}
+    %  \item Multivariate methods perform better than univariate methods
+    %\end{itemize1}
+    %}
   }{
     \uncover<4->{
       \includegraphics[height=0.13\textheight]{figures/logistic_function_02.pdf}\\
@@ -248,6 +260,35 @@
     \only<2->{
     \includegraphics[height=0.9\textheight]{figures/bvslr_01.png}\\
     }
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Goal of our method}
+  %\uncover<3->
+  {\center
+  \begin{tikzpicture}[node distance=2cm]
+    \node (improve) at ( 0,  0) [textbox] {Combine information / evidence};
+    \node (multi)   at (-3, -2) [decision] {Multivariate analysis};
+    \node (meta)    at ( 3, -2) [decision] {Meta-analysis};
+    \node (text1)   at (-3, -3.2) [textbox] {over many \textbf{SNPs}};
+    \node (text2)   at ( 3, -3.2) [textbox] {over many \textbf{studies}};
+    \uncover<2->{
+    \node (bvslr)   at ( 0, -5) [highlight] {BVSLR};
+    }
+    \coordinate (z) at ( 0, -1);
+    \draw [line] (improve) -- (z);
+    \draw [arrow] (z) -| (meta);
+    \draw [arrow] (z) -| (multi);
+    \uncover<2->{
+    \draw [arrow] (text1) -- (bvslr);
+    \draw [arrow] (text2) -- (bvslr);
+    \uncover<3->{
+    \node (text3)   at ( 0, -6.2) [textbox] {distinguish correlation from coupling};
+    \draw [arrow] (bvslr) -- (text3);
+    }
+    }
+  \end{tikzpicture}\\
   }
 \end{frame}
 
@@ -418,6 +459,27 @@
 
 \begin{frame}
   \frametitle{BVSLR can be extended to multiple studies}
+  {\center
+    \vskip -1em
+    \only<1-1>{
+      \includegraphics[height=0.8\textheight]{figures/bvslr_meta_method_00.png}\\
+    }
+    \only<2-2>{
+      \includegraphics[height=0.8\textheight]{figures/bvslr_meta_method_01.png}\\
+    }
+    \only<3-3>{
+      \includegraphics[height=0.8\textheight]{figures/bvslr_meta_method_02.png}\\
+    }
+    \only<4-4>{
+      \includegraphics[height=0.8\textheight]{figures/bvslr_meta_method_03.png}\\
+    }
+    \only<5-5>{
+      \includegraphics[height=0.8\textheight]{figures/bvslr_meta_method_04.png}\\
+    }
+    \only<6-6>{
+      \includegraphics[height=0.8\textheight]{figures/bvslr_meta_method_05.png}\\
+    }
+  }
 \end{frame}
 
 \subsection{Results // metaanalysis simulation}
@@ -482,7 +544,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{If there are non-causal loci in LD with causal regions}
+  \frametitle{Correlation vs coupling}
   \myfulltwocolumn{0.6}{T}
   {
     \includegraphics[width=1.0\textwidth]{figures/simu_locus_precision_recall_withld.pdf}\\
@@ -491,8 +553,11 @@
       \text{\scriptsize Precision} & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}} \\
       \text{\scriptsize Recall}    & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FN}} \\
     \end{align*}
+    \vskip -2em
     \begin{itemize1}
+      \small
       \item 8 loci (out of 200) in LD with each other were introduced in the simulation
+      \item Non-causal loci in correlation with multiple causal loci reduces precision of SNPTEST
     \end{itemize1}
   }
 \end{frame}
@@ -641,11 +706,22 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Possible extensions of BVSLR}
+  \begin{itemize1}
+    \item Integrate additional data \eg ENCODE, DeepSEA, etc.
+    \item Gene-environment interaction
+    \item Dominant and recessive models
+    \item Integration with GTEx
+    %\item<2-> Actively looking forward to real data to apply BVSLR
+  \end{itemize1}
+\end{frame}
+
+\begin{frame}
   \frametitle{Essence}
   \begin{itemize1}
     \item Novel Bayesian method for GWAS
     \item Multivariate analysis in meta studies
-    \item Precision
+    \item Improves precision
     \item Predicts new associations in CAD
     %\item<2-> Actively looking forward to real data to apply BVSLR
   \end{itemize1}
@@ -721,6 +797,15 @@
   {\center
     %\vskip -2em
     \includegraphics[width=0.9\textwidth]{figures/risk_corr_power.pdf}\\
+  }
+\end{frame}
+
+\begin{frame}[noframenumbering]
+  \frametitle{Integration with GTEx}
+  \myreference{Gamazon \etal, Nat. Genet. 2015}
+  {\center
+    \vskip -2em
+    \includegraphics[height=0.8\textheight]{figures/PrediXcan.jpg}\\
   }
 \end{frame}
 
