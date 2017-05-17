@@ -68,16 +68,20 @@
 
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{shapes.geometric, arrows}
 \tikzstyle{decision} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, line width=1pt, text centered, align=flush center, draw=primary, fill=highlight!20]
 \tikzstyle{origin} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, line width=1pt, text centered, align=flush center, draw=subdue]%text=secondary]
 \tikzstyle{highlight} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, line width=1pt, text centered, align=flush center, draw=secondary, fill=important!30]%text=secondary]
+\tikzstyle{textbox} = [rectangle, text centered, align=flush center]
 \tikzstyle{doubt} = [circle, line width=1pt, text centered, align=flush center, draw=secondary, fill=important!20]
 \tikzstyle{arrow} = [thick,->,>=stealth]
 \tikzstyle{line} = [thick, -]
 
+
+
 \include{mycommands}
 
-\title{Bayesian variable selection logistic regression: multivariate metaanalysis in GWAS}
+\title{Bayesian multivariate metaanalysis in GWAS \\ (BammGWAS)}
 \author{Saikat Banerjee}
 \institute{Max Planck Institute for Biophysical Chemistry}
 \titlegraphic{\includegraphics[height=1.4cm]{mpi-logo/Max-Planck-Gesellschaft-no-txt.pdf}\nobreak\hspace{1em}%
@@ -180,19 +184,30 @@
     \begin{itemize2}
       %\item SNPs in linkage disequilibrium with the causal $\Rightarrow$ similar significance scores
       \item Linkage disequilibrium
+      \item Correlation vs coupling
       %\item<3-> Concerted mechanism $\Rightarrow$ Small individual effect sizes
       \item Genetic networks
       %\item Marginal effect of individual SNPs $\neq$ Combined effects
       \item Low effect sizes
     \end{itemize2}
     }
+  \uncover<3->{
+      \center
+      \includegraphics[width=0.6\textwidth]{figures/ld_effect.png}\\
+    }
   }
-  \uncover<3->
+\end{frame}
+
+\begin{frame}
+  \frametitle{How GWAS have improved?}
+  %\uncover<3->
   {\center
   \begin{tikzpicture}[node distance=2cm]
-    \node (improve) at ( 0,  0) [origin] {Improvements};
+    \node (improve) at ( 0,  0) [textbox] {Combine information / evidence};
     \node (multi)   at (-3, -2) [decision] {Multivariate analysis};
     \node (meta)    at ( 3, -2) [decision] {Meta-analysis};
+    \node (text1)   at (-3, -3.2) [textbox] {over many \textbf{SNPs}};
+    \node (text2)   at ( 3, -3.2) [textbox] {over many \textbf{studies}};
     \coordinate (z) at ( 0, -1);
     \draw [line] (improve) -- (z);
     \draw [arrow] (z) -| (meta);
@@ -200,6 +215,7 @@
   \end{tikzpicture}\\
   }
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Multivariate methods}
@@ -278,38 +294,32 @@
   }
 \end{frame}
 
-%\begin{frame}
-%  \frametitle{Goal of our method}
-%  {\center
-%  \begin{tikzpicture}[node distance=2cm]
-%    \node (improve) at ( 0,  0) [origin] {GWAS};
-%    \node (multi)   at (-3, -2) [decision] {Multivariate analysis};
-%    \node (meta)    at ( 3, -2) [decision] {Meta-analysis};
-%    \coordinate (z) at ( 0, -1);
-%    \node (q)       at ( 0, -4) [doubt] {?};
-%    \draw [line] (improve) -- (z);
-%    \draw [arrow] (z) -| (meta);
-%    \draw [arrow] (z) -| (multi);
-%    \draw [arrow] (meta) -- (q);
-%    \draw [arrow] (multi) -- (q);
-%  \end{tikzpicture}\\
-%  }
-%  \vskip 1em
-%  \begin{itemize1}
-%    \item Can we extract more information from existing data?
-%  \end{itemize1}
-%\end{frame}
-
 \begin{frame}
-  \frametitle{Preview of BVSLR}
-  \myfulltwocolumn{0.6}{T}
-  {
-    \includegraphics[width=1.0\textwidth]{figures/simu_locus_precision_recall_withld.pdf}\\
-  }{
-    \begin{align*}
-      \text{\scriptsize Precision} & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}} \\
-      \text{\scriptsize Recall}    & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FN}} \\
-    \end{align*}
+  \frametitle{Goal of our method}
+  %\uncover<3->
+  {\center
+  \begin{tikzpicture}[node distance=2cm]
+    \node (improve) at ( 0,  0) [textbox] {Combine information / evidence};
+    \node (multi)   at (-3, -2) [decision] {Multivariate analysis};
+    \node (meta)    at ( 3, -2) [decision] {Meta-analysis};
+    \node (text1)   at (-3, -3.2) [textbox] {over many \textbf{SNPs}};
+    \node (text2)   at ( 3, -3.2) [textbox] {over many \textbf{studies}};
+    \uncover<2->{
+    \node (bvslr)   at ( 0, -5) [highlight] {BammGWAS};
+    }
+    \coordinate (z) at ( 0, -1);
+    \draw [line] (improve) -- (z);
+    \draw [arrow] (z) -| (meta);
+    \draw [arrow] (z) -| (multi);
+    \uncover<2->{
+    \draw [arrow] (text1) -- (bvslr);
+    \draw [arrow] (text2) -- (bvslr);
+    \uncover<3->{
+    \node (text3)   at ( 0, -6.2) [textbox] {distinguish correlation from coupling};
+    \draw [arrow] (bvslr) -- (text3);
+    }
+    }
+  \end{tikzpicture}\\
   }
 \end{frame}
 
@@ -341,24 +351,16 @@
   \end{itemize1}
 \end{frame}
 
-%\begin{frame}
-%  \frametitle{BVSR improves SNP identification}
-%  \uncover<1->
-%  {\center
-%    \includegraphics[width=0.5\textwidth]{figures/bvsr_vs_univariate.png}\\[0.7em]
-%  }
-%  \uncover<2>{
-%  \begin{itemize1}
-%    \item {BVSR unfortunately does not allow multivariate metaanalysis}\\[0.5em]
-%    \item {\color{primary} No analytical solution for binary phenotypes}
-%    %\item Future plans
-%  \end{itemize1}
-%  }
-%  \myreference{Guan and Stephens, \textit{Ann. Appl. Stats.} 2011}
-%\end{frame}
-
 \begin{frame}
   \frametitle{Bayesian variable selection logistic regression (BVSLR)}
+  \myfulltwocolumn{0.3}{c}
+  {
+    \begin{tikzpicture}
+      \node (a) at (0,0) [highlight] {\textbf{BammGWAS}};
+    \end{tikzpicture}
+  }{
+    Banerjee and S\"oding, \textit{manuscript prepared} 2017\\
+  }
   \myfulltwocolumn{0.5}{c}
   {
     \begin{flalign*}
@@ -403,7 +405,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Sparsity in BVSR / BVSLR}
+  \frametitle{Sparsity in BVSR (BIMBAM) / BVSLR (BammGWAS)}
   Looks at both {\color{primary} null hypothesis} and {\color{secondary}alternate hypothesis}
   {\center
     \includegraphics[width=0.8\textwidth]{figures/bayesian_logistic_regression_01.pdf}\\
@@ -411,7 +413,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Priors in BVSR}
+  \frametitle{Priors in BVSR (BIMBAM)}
   \begin{columns}[c]
     \begin{column}{0.25\textwidth}
     \end{column}
@@ -435,7 +437,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Priors in BVSLR}
+  \frametitle{Priors in BVSLR (BammGWAS)}
   \begin{empheq}[box=\mymathbox]{equation*}
     p\left(\bs\phi \mid \vx, \vv \right) = \prod_{n=1}^N \frac{\exp(\phi_n \vv^\intercal \vx_n )}{1 + \exp( \vv^\intercal \vx_n )}
   \end{empheq}
@@ -591,7 +593,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Inference of causality in BVSLR}
+  \frametitle{Inference of causality in BVSLR (BammGWAS)}
   Using the definition of conditional probability,
   \begin{equation*}
     p(\vz \mid \bs\phi, \vx, \bs\theta) = \frac{p(\bs\phi, \vz \mid \vx, \bs\theta)}
@@ -638,20 +640,20 @@
 
 \subsection{Results // metaanalysis simulation}
 
-\begin{frame}
-  \frametitle{Simulation details}
-  \begin{itemize}
-    \setlength{\parskip}{4pt}
-    \item Genotype: German Myocardial Infarction Family Study (GERMIFS)
-    \item Five cohorts {\color{hidden}: G1, G2, G3, G4, G5}
-    \item Phenotype simulation:
-    \begin{eqnarray*}
-      \text{Disease liability \quad} \color{primary} Y_{n}  =  \color{primary} \sum_{i} v_{i}x_{ni} + \varepsilon_{n} \\      
-      \Var\left( \sum_{i} v_{i}x_{ni} \right) = h_g^2 = 0.4 \text{ and } \Var(\varepsilon) = 0.6
-    \end{eqnarray*}
-    Cases are sampled from $Y_n$ exceeding the threshold of normal distribution truncating the proportion of $k$ (disease prevalence)
-  \end{itemize}
-\end{frame}
+%\begin{frame}
+%  \frametitle{Simulation details}
+%  \begin{itemize}
+%    \setlength{\parskip}{4pt}
+%    \item Genotype: German Myocardial Infarction Family Study (GERMIFS)
+%    \item Five cohorts {\color{hidden}: G1, G2, G3, G4, G5}
+%    \item Phenotype simulation:
+%    \begin{eqnarray*}
+%      \text{Disease liability \quad} \color{primary} Y_{n}  =  \color{primary} \sum_{i} v_{i}x_{ni} + \varepsilon_{n} \\      
+%      \Var\left( \sum_{i} v_{i}x_{ni} \right) = h_g^2 = 0.4 \text{ and } \Var(\varepsilon) = 0.6
+%    \end{eqnarray*}
+%    Cases are sampled from $Y_n$ exceeding the threshold of normal distribution truncating the proportion of $k$ (disease prevalence)
+%  \end{itemize}
+%\end{frame}
 
 \begin{frame}
   \frametitle{Simulation details}
@@ -660,10 +662,13 @@
     \includegraphics[width=0.86\textwidth]{figures/simulation_details.png}\\
   }{
     \begin{itemize1}
-      \item BVSLR
+      \item BammGWAS
       \item BIMBAM
       \item SNPTEST / META
+      \item metaCCA
       \item PAINTOR
+      \item CAVIARBF
+      \item FINEMAP
     \end{itemize1}
     \vspace{2em}
   }
@@ -673,11 +678,10 @@
   \frametitle{Prediction of causal loci}
   \myfulltwocolumn{0.6}{T}
   {
-    \includegraphics[width=1.0\textwidth]{figures/simu_locus_scatter_nold.png}\\
+    \includegraphics[width=1.0\textwidth]{figures/simu_locus_scatter_nold_nofeat.pdf}\\
   }{
     \scriptsize
     \begin{itemize1}
-      \item Shaded region shows improvement with BVSLR
       \item 5000 causal loci (100 from each of the 50 simulations)
       \item 5000 non-causal loci (100 from each of the 50 simulations)
     \end{itemize1}
@@ -691,7 +695,7 @@
     \includegraphics[width=1.0\textwidth]{figures/simu_locus_precision_recall_nold.pdf}\\
   }{
     \begin{align*}
-      \text{\scriptsize Precision} & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}} \\
+      \text{\scriptsize Precision} & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}} \\[1em]
       \text{\scriptsize Recall}    & = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FN}} \\
     \end{align*}
   }
@@ -741,33 +745,33 @@
     \includegraphics[width=1.0\textwidth]{figures/simu_finemap_recall_nold.pdf}\\
   }{
     \begin{itemize1}
-      \item Comparable to PAINTOR up to 20\% recall
+      \item Comparable to CAVIARBF up to 20\% recall
     \end{itemize1}
   }
 \end{frame}
 
 \begin{frame}
-  \frametitle{BVSLR predicts SNPs in strong LD with actual ones}
+  \frametitle{Functional annotation improves finemapping}
   \mytwocolumn{0.5}{T}
   {
     \center
     \vskip -2em
-    \includegraphics[width=1.0\textwidth]{figures/simu_finemap_precision_recall01_nold.pdf} \\
+    \includegraphics[width=1.0\textwidth]{figures/simu_finemap_precision_recall_nold.pdf} \\
   }{
     \center
     \vskip -2em
-    \includegraphics[width=1.0\textwidth]{figures/simu_finemap_precision_recall02_nold.pdf}\\
+    \includegraphics[width=1.0\textwidth]{figures/simu_finemap_altprecision_recall_nold.pdf}\\
   }
 \end{frame}
 
-\begin{frame}
-  \frametitle{Challenges of BVSLR}
-  \begin{itemize1}
-    \item Computational time (summing over $\vz$-states)
-    \item New summary statistics
-    \item Prior assumptions
-  \end{itemize1}
-\end{frame}
+%\begin{frame}
+%  \frametitle{Challenges of BVSLR}
+%  \begin{itemize1}
+%    \item Computational time (summing over $\vz$-states)
+%    \item New summary statistics
+%    \item Prior assumptions
+%  \end{itemize1}
+%\end{frame}
 
 \subsection{Coronary Artery Diseases}
 
@@ -787,13 +791,13 @@
   \vskip 1em
   \uncover<3->{
   \begin{itemize1}
-    \item Applied BVSLR on these 45 loci, selecting 400 SNPs at each locus.
+    \item Applied BammGWAS on these 45 loci, selecting 400 SNPs at each locus.
   \end{itemize1}
   }
 \end{frame}
 
 \begin{frame}
-  \frametitle{BVSLR predictions}
+  \frametitle{BammGWAS predictions}
   \only<1-1>
   {
   \vskip -1em
@@ -807,7 +811,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Top BVSLR predicted loci (not discovered in CardiogramPlusC4D)}
+  \frametitle{Top BammGWAS predicted loci (not discovered in CardiogramPlusC4D)}
   \vskip -2em
   {\center \scriptsize
     \def\arraystretch{1.5}
@@ -846,7 +850,7 @@
    GWAS using SNPTEST / META \\
    \includegraphics[width=1.0\textwidth]{figures/cad_gwas_germifs_200.png} \\
    \begin{itemize1}
-     \item Applied BVSLR on these 200 loci, selecting 400 SNPs at each locus.
+     \item Applied BammGWAS on these 200 loci, selecting 400 SNPs at each locus.
    \end{itemize1}
   }
   \only<2->
@@ -857,14 +861,22 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Essence}
+  \frametitle{Summary}
   \begin{itemize1}
-    \item Novel Bayesian method for GWAS
     \item Multivariate analysis in meta studies
-    \item Precision
+    \item High (German) precision
     \item Predicts new associations in CAD
-    %\item<2-> Actively looking forward to real data to apply BVSLR
   \end{itemize1}
+  \vskip2em
+  \uncover<2->{
+  \textbf{Outlook}
+  \begin{itemize1}
+    \item Submission
+    \item GWAS-GTEx combined analysis
+    \item Age-at-onset: Quantitative phenotype for CAD?
+    \item New statistic for trans-eQTL analysis? 
+  \end{itemize1}
+  }
 \end{frame}
 
 \begin{frame}
