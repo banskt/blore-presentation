@@ -81,7 +81,7 @@
 
 \include{mycommands}
 
-\title{Bayesian multivariate metaanalysis in GWAS \\ (BammGWAS)}
+\title{Bayesian multiple logistic regression for metaanalysis in GWAS (B-LORE)}
 \author{Saikat Banerjee}
 \institute{Max Planck Institute for Biophysical Chemistry}
 \titlegraphic{\includegraphics[height=1.4cm]{mpi-logo/Max-Planck-Gesellschaft-no-txt.pdf}\nobreak\hspace{1em}%
@@ -305,7 +305,7 @@
     \node (text1)   at (-3, -3.2) [textbox] {over many \textbf{SNPs}};
     \node (text2)   at ( 3, -3.2) [textbox] {over many \textbf{studies}};
     \uncover<2->{
-    \node (bvslr)   at ( 0, -5) [highlight] {BammGWAS};
+    \node (bvslr)   at ( 0, -5) [highlight] {B-LORE};
     }
     \coordinate (z) at ( 0, -1);
     \draw [line] (improve) -- (z);
@@ -356,7 +356,7 @@
   \myfulltwocolumn{0.3}{c}
   {
     \begin{tikzpicture}
-      \node (a) at (0,0) [highlight] {\textbf{BammGWAS}};
+      \node (a) at (0,0) [highlight] {\textbf{B-LORE}};
     \end{tikzpicture}
   }{
     Banerjee and S\"oding, \textit{manuscript prepared} 2017\\
@@ -405,7 +405,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Sparsity in BVSR (BIMBAM) / BVSLR (BammGWAS)}
+  \frametitle{Sparsity in BVSR (BIMBAM) / BVSLR (B-LORE)}
   Looks at both {\color{primary} null hypothesis} and {\color{secondary}alternate hypothesis}
   {\center
     \includegraphics[width=0.8\textwidth]{figures/bayesian_logistic_regression_01.pdf}\\
@@ -437,7 +437,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Priors in BVSLR (BammGWAS)}
+  \frametitle{Priors in BVSLR (B-LORE)}
   \begin{empheq}[box=\mymathbox]{equation*}
     p\left(\bs\phi \mid \vx, \vv \right) = \prod_{n=1}^N \frac{\exp(\phi_n \vv^\intercal \vx_n )}{1 + \exp( \vv^\intercal \vx_n )}
   \end{empheq}
@@ -593,7 +593,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Inference of causality in BVSLR (BammGWAS)}
+  \frametitle{Inference of causality in BVSLR (B-LORE)}
   Using the definition of conditional probability,
   \begin{equation*}
     p(\vz \mid \bs\phi, \vx, \bs\theta) = \frac{p(\bs\phi, \vz \mid \vx, \bs\theta)}
@@ -662,7 +662,7 @@
     \includegraphics[width=0.86\textwidth]{figures/simulation_details.png}\\
   }{
     \begin{itemize1}
-      \item BammGWAS
+      \item B-LORE
       \item BIMBAM
       \item SNPTEST / META
       \item metaCCA
@@ -791,27 +791,35 @@
   \vskip 1em
   \uncover<3->{
   \begin{itemize1}
-    \item Applied BammGWAS on these 45 loci, selecting 400 SNPs at each locus.
+    \item Applied B-LORE on these 45 loci, selecting 400 SNPs at each locus.
   \end{itemize1}
   }
 \end{frame}
 
+%\begin{frame}
+%  \frametitle{B-LORE predictions}
+%  \only<1-1>
+%  {
+%  \vskip -1em
+%   \includegraphics[height=0.7\textheight]{figures/loci_classification_01.pdf} \\
+%  }
+%  \only<2->
+%  {
+%  \vskip -1em
+%   \includegraphics[height=0.7\textheight]{figures/loci_classification_03.pdf} \\
+%  }
+%\end{frame}
+
 \begin{frame}
-  \frametitle{BammGWAS predictions}
-  \only<1-1>
+  \frametitle{B-LORE predictions}
   {
-  \vskip -1em
-   \includegraphics[height=0.7\textheight]{figures/loci_classification_01.pdf} \\
-  }
-  \only<2->
-  {
-  \vskip -1em
-   \includegraphics[height=0.7\textheight]{figures/loci_classification_03.pdf} \\
+    \vskip -1em
+    \includegraphics[height=0.7\textheight]{figures/loci_classification_04.pdf} \\
   }
 \end{frame}
 
 \begin{frame}
-  \frametitle{Top BammGWAS predicted loci (not discovered in CardiogramPlusC4D)}
+  \frametitle{Top B-LORE predicted loci (not discovered in CardiogramPlusC4D)}
   \vskip -2em
   {\center \scriptsize
     \def\arraystretch{1.5}
@@ -822,22 +830,21 @@
       6p21.3  & 0.998  & C6orf10-BTNL2 & GWAS for CAD in Han Chinese, 2012 \\
       \rowcolor{secondary!30}
       15q25   & 0.997  & IL-16 & GWAS for CAD in Han Chinese, 2012 \\
-      4q13.1  & 0.996  & desert & -- \\
       \rowcolor{secondary!15}
-      15q25   & 0.994  & AKAP13 & C. hypertrophy (mice) / GWAS (BP in Koreans, 2011) \\
+      12q24   & 0.996  & ZNF664 & GWAS hit for HDL-C, TG, 2015 \\
+      \rowcolor{secondary!15}
+      15q25   & 0.994  & AKAP13 & GWAS for BP in Koreans, 2011 \\
+      4q13.1  & 0.991  & desert & -- \\
       \rowcolor{secondary!30}
-      2p16    & 0.994  & NRXN1   & GWAS for CAD in OHGS1 + WTCCC2 \\
+      2p16    & 0.988  & NRXN1   & GWAS for CAD in OHGS1 + WTCCC2, 2015 \\
       \rowcolor{secondary!15}
-      3q28    & 0.992  & IL1RAP & Involved in risk pathway \\
+      3q28    & 0.988  & IL1RAP & Mediation via IL-33, 2010 \\
       \rowcolor{secondary!15}
-      6p25    & 0.992  & SERPINB & patented as biomarker for CVD \\
-      \rowcolor{secondary!30}
-      20q13.3 & 0.991  & EDN3    & GWAS hit for BP / CVD \\
-      7q11.22 & 0.990  & AUTS2  & -- \\
+      13q21.1 & 0.987  & ARHGEF1 & Regulates Blood Pressure, 2010 \\
       \rowcolor{secondary!15}
-      12q24   & 0.982  & ZNF664 & GWAS hit for HDL-C, TG \\
-      \rowcolor{secondary!15}
-      13q21.1 & 0.981  & ARHGEF1 & Controls vascular tone and BP \\
+      6p25    & 0.985  & MYLK4 & Downregulated in heart failure, 2014 \\
+      7q11.22 & 0.980  & AUTS2  & -- \\
+      3p26    & 0.952  & desert & -- \\
     \end{tabular}
   \\}
 \end{frame}
@@ -850,7 +857,7 @@
    GWAS using SNPTEST / META \\
    \includegraphics[width=1.0\textwidth]{figures/cad_gwas_germifs_200.png} \\
    \begin{itemize1}
-     \item Applied BammGWAS on these 200 loci, selecting 400 SNPs at each locus.
+     \item Applied B-LORE on these 200 loci, selecting 400 SNPs at each locus.
    \end{itemize1}
   }
   \only<2->
