@@ -1,1 +1,1 @@
-# Latex presentation for BVSLR
+# Latex presentation for B-LORE
