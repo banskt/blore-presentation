@@ -1,0 +1,45 @@
+%% Aspect ration 16:9
+\documentclass[english, xcolor=table, aspectratio=169]{beamer}
+
+\usetheme{modernmpibpc}
+
+\usepackage[T1]{fontenc}
+\usepackage{fouriernc} % sharper font for on-screen
+\DeclareMathAlphabet{\mathbf}{T1}{fut\mathfamilyextension}{b}{n}
+\renewcommand{\bfdefault}{b}
+
+\usepackage{charter}
+\usepackage[defaultsans]{droidsans}
+
+% strikeout text
+\usepackage{soul}
+
+% Tikz
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+
+\title{Statistical models to analyze human genetic data}
+\author{\underline{S. Banerjee}, F. Simonetti \& J. S\"oding*}
+\institute{Max Planck Institute for Biophysical Chemistry}
+\titlegraphic{\includegraphics[height=1.4cm]{mpi-logo/Max-Planck-Gesellschaft-no-txt.pdf}\nobreak\hspace{1em}%
+              \includegraphics[height=1.4cm]{mpi-logo/Print_Plotter_MPI-BPC_kurz-short_CMYK.eps}}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[label=mytitle]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{}
+  \begin{itemize1}
+    \item Novel Bayesian method for GWAS
+    \item Multivariate analysis in meta studies
+    \item Improves precision
+    \item Predicts new associations in CAD
+    %\item<2-> Actively looking forward to real data to apply BVSLR
+  \end{itemize1}
+\end{frame}
+
+\end{document}

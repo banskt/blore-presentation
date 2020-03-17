@@ -1,30 +1,67 @@
 \mode<presentation>
 
+%%% Title Page
+%%\defbeamertemplate*{title page}{customized}[1][]
+%%{
+%%\vskip-0em%\par
+%%\begin{beamercolorbox}[wd=\paperwidth,ht=0.5\paperheight,sep=1.5em, left]{title}
+%%  \begin{tikzpicture}
+%%  \path (0, 0) coordinate (p1);
+%%  \path (0, 2) coordinate (p2);
+%%  \draw[line width = 1.5pt, -, draw=primary] (p1) to (p2);
+%%  \end{tikzpicture}
+%%  \begin{beamercolorbox}[wd=0.95\textwidth, ht=0.4\textheight, sep=0.8em, left]{title}
+%%     \usebeamerfont{title}\inserttitle\par
+%%     %\vskip-0.4em
+%%  \end{beamercolorbox}
+%%\end{beamercolorbox}
+%%\leavevmode
+%%  \hbox{%
+%%    \begin{beamercolorbox}[wd=.55\textwidth, ht=0.35\paperheight, sep=0em, left]{title}
+%%      \begin{tikzpicture}
+%%        \path (0, 0) coordinate (p1);
+%%        \path (0, 1.5) coordinate (p2);
+%%        \draw[line width = 1.5pt, -, draw=secondary] (p1) to (p2);
+%%      \end{tikzpicture}
+%%      \begin{beamercolorbox}[wd=.5\textwidth, ht=0.35\paperheight, sep=0.05em]{author}
+%%        {\usebeamercolor[fg]{author name}\usebeamerfont{author}\insertauthor\par}
+%%        \vspace{0.1cm}
+%%        {\usebeamerfont{institute}\insertinstitute \par
+%%         \usebeamerfont{date}\insertdate
+%%        }
+%%      \end{beamercolorbox}%
+%%    \end{beamercolorbox}
+%%    \begin{beamercolorbox}[wd=.45\textwidth, ht=0.35\paperheight, sep=1.5em, right]{frametitle}%
+%%      {\flushright\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+%%    \end{beamercolorbox}
+%%  }
+%%}
+
 
 % Title Page
 \defbeamertemplate*{title page}{customized}[1][]
 {
-    \vskip-3.1em%\par
-    \begin{beamercolorbox}[wd=\paperwidth,ht=0.61\paperheight,sep=1.5em,#1]{title}
-      \usebeamerfont{title}\inserttitle\par
+  \vskip-3.1em%\par
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.4\paperheight,sep=1.5em,#1]{title}
+    \usebeamerfont{maintitle}\inserttitle\par
+  \end{beamercolorbox}
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.25em,#1]{titleShadow}
+      \mbox{}
+  \end{beamercolorbox}
+  \leavevmode
+  \hbox{%
+    \begin{beamercolorbox}[wd=.55\textwidth, ht=0.4\paperheight, sep=0.05em]{author}
+      {\usebeamercolor[fg]{author name}\usebeamerfont{author}\insertauthor\par}
+      \vspace{0.1cm}
+      {\usebeamerfont{institute}\insertinstitute \par
+       \usebeamerfont{date}\insertdate
+      }
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.45\textwidth, ht=0.35\paperheight, sep=0.05em]{titlegraphic bg}%
+      {\flushright\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
     \end{beamercolorbox}
-    \nointerlineskip
-    \begin{beamercolorbox}[wd=\paperwidth,ht=0.25em,#1]{titleShadow}
-        \mbox{}
-    \end{beamercolorbox}
-    \leavevmode
-    \hbox{%
-      \begin{beamercolorbox}[wd=.55\textwidth, ht=0.35\paperheight, sep=0.05em]{author}
-        {\usebeamercolor[fg]{author name}\usebeamerfont{author}\insertauthor\par}
-        \vspace{0.1cm}
-        {\usebeamerfont{institute}\insertinstitute \par
-         \usebeamerfont{date}\insertdate
-        }
-      \end{beamercolorbox}%
-      \begin{beamercolorbox}[wd=.45\textwidth, ht=0.35\paperheight, sep=0.05em]{titlegraphic bg}%
-        {\flushright\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
-      \end{beamercolorbox}
-    }
+  }
 }
 
 \defbeamertemplate*{footnote}{customized}
